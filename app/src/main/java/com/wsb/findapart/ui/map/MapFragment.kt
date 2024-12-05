@@ -1,42 +1,24 @@
 package com.wsb.findapart.ui.map
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.wsb.findapart.databinding.FragmentMapBinding
+import androidx.lifecycle.get
+import com.wsb.findapart.R
 
-class MapFragment : Fragment() {
+class MapFragment : Fragment(R.layout.fragment_map) {
+    private lateinit var viewModel: MapViewModel
 
-    private var _binding: FragmentMapBinding? = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+        val textView = view.findViewById<TextView>(R.id.text_map)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val mapViewModel =
-            ViewModelProvider(this).get(MapViewModel::class.java)
-
-        _binding = FragmentMapBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textMap
-        mapViewModel.text.observe(viewLifecycleOwner) {
+        viewModel = ViewModelProvider(this).get<MapViewModel>()
+        viewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

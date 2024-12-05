@@ -2,30 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@id/navigation_home"
         android:name="com.wsb.findapart.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_list"
+        android:id="@id/navigation_list"
         android:name="com.wsb.findapart.ui.list.ListFragment"
         android:label="@string/title_list"
         tools:layout="@layout/fragment_list" />
 
     <fragment
-        android:id="@+id/navigation_map"
+        android:id="@id/navigation_map"
         android:name="com.wsb.findapart.ui.map.MapFragment"
         android:label="@string/title_map"
         tools:layout="@layout/fragment_map" />
 
     <fragment
-        android:id="@+id/navigation_saved"
+        android:id="@id/navigation_saved"
         android:name="com.wsb.findapart.ui.saved.SavedFragment"
         android:label="@string/title_saved"
         tools:layout="@layout/fragment_saved" />
+
 </navigation>
