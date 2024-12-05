@@ -29,5 +29,15 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             collapsingToolbar.title = destination.label
         }
+
+        toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.help_screen -> {
+                    navController.navigate(R.id.navigation_help)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 }

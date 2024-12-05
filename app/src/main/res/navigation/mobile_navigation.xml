@@ -28,4 +28,10 @@
         android:label="@string/title_saved"
         tools:layout="@layout/fragment_saved" />
 
+    <fragment
+        android:id="@+id/navigation_help"
+        android:name="com.wsb.findapart.ui.help.HelpFragment"
+        android:label="@string/title_help"
+        tools:layout="@layout/fragment_help" />
+
 </navigation>
