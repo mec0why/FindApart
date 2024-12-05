@@ -1,42 +1,24 @@
 package com.wsb.findapart.ui.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.wsb.findapart.databinding.FragmentListBinding
+import androidx.lifecycle.get
+import com.wsb.findapart.R
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(R.layout.fragment_list) {
+    private lateinit var viewModel: ListViewModel
 
-    private var _binding: FragmentListBinding? = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+        val textView = view.findViewById<TextView>(R.id.text_list)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val listViewModel =
-            ViewModelProvider(this).get(ListViewModel::class.java)
-
-        _binding = FragmentListBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textList
-        listViewModel.text.observe(viewLifecycleOwner) {
+        viewModel = ViewModelProvider(this).get<ListViewModel>()
+        viewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

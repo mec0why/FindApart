@@ -1,4 +1,4 @@
-package com.wsb.findapart.ui.map
+package com.wsb.findapart.ui.help
 
 import android.os.Bundle
 import android.view.View
@@ -8,15 +8,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.wsb.findapart.R
 
-class MapFragment : Fragment(R.layout.fragment_map) {
-    private lateinit var viewModel: MapViewModel
+class HelpFragment : Fragment(R.layout.fragment_help) {
+    private lateinit var viewModel: HelpViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView = view.findViewById<TextView>(R.id.text_map)
+        val textView = view.findViewById<TextView>(R.id.text_help)
 
-        viewModel = ViewModelProvider(this).get<MapViewModel>()
+        viewModel = ViewModelProvider(this).get<HelpViewModel>()
         viewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
