@@ -1,6 +1,7 @@
 package com.wsb.findapart
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             collapsingToolbar.title = destination.label
+            //binding.headerImage.visibility = if (destination.id == R.id.navigation_home) View.VISIBLE else View.GONE
         }
 
         toolbar.setOnMenuItemClickListener { menuItem ->
