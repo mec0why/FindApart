@@ -21,15 +21,16 @@
             app:titleCollapseMode="scale"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?colorPrimaryContainer">
-<!--
+
             <ImageView
                 android:id="@+id/header_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo"
-                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_foreground"
+                android:scaleType="fitEnd"
+                android:alpha="0.1"
                 android:visibility="visible" />
--->
+
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"

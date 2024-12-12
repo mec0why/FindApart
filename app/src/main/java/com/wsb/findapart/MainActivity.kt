@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             collapsingToolbar.title = destination.label
-            //binding.headerImage.visibility = if (destination.id == R.id.navigation_home) View.VISIBLE else View.GONE
+            binding.headerImage.visibility = if (destination.id == R.id.navigation_home) View.VISIBLE else View.GONE
         }
 
         toolbar.setOnMenuItemClickListener { menuItem ->
