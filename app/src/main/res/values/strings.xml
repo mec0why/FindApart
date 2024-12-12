@@ -22,7 +22,7 @@
         <item>Wrocław</item>
         <item>Gdańsk</item>
         <item>Poznań</item>
-        <item>Szczecin</item>
+        <item>szczecin</item>
         <item>Gdynia</item>
         <item>Białystok</item>
         <item>Radom</item>
@@ -38,7 +38,7 @@
         <item>-</item>
         <item>Block of flats</item>
         <item>Apartment building</item>
-        <item>Tenement</item>
+        <item>tenement</item>
     </string-array>
 
     <string-array name="area_options">
