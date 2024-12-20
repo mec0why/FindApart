@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="16dp"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,152 +13,127 @@
         <TextView
             android:id="@+id/tvCity"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvType"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvArea"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvRoom"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvFloor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvFloorCount"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvBuildYear"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvCentreDistance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvPoiCount"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvSchoolDistance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvClinicDistance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvPostOfficeDistance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvKindergartenDistance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvRestaurantDistance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvCollegeDistance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvPharmacyDistance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvOwnership"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvBuildingMaterial"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvCondition"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvHasParkingSpace"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvHasBalcony"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvHasElevator"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvHasSecurity"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvHasStorageRoom"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

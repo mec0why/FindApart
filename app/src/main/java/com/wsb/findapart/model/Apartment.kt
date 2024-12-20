@@ -1,0 +1,30 @@
+package com.wsb.findapart.model
+
+data class Apartment(
+    val id: String,
+    val city: String,
+    val type: String,
+    val squareMeters: Double,
+    val rooms: Int,
+    val floor: Int,
+    val floorCount: Int,
+    val buildYear: Int,
+    val centreDistance: Double,
+    val poiCount: Int,
+    val schoolDistance: Double,
+    val clinicDistance: Double,
+    val postOfficeDistance: Double,
+    val kindergartenDistance: Double,
+    val restaurantDistance: Double,
+    val collegeDistance: Double,
+    val pharmacyDistance: Double,
+    val ownership: String,
+    val buildingMaterial: String,
+    val condition: String,
+    val hasParkingSpace: String,
+    val hasBalcony: String,
+    val hasElevator: String,
+    val hasSecurity: String,
+    val hasStorageRoom: String,
+    val price: Int
+)
