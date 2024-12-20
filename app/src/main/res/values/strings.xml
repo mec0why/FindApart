@@ -22,7 +22,7 @@
         <item>Wrocław</item>
         <item>Gdańsk</item>
         <item>Poznań</item>
-        <item>szczecin</item>
+        <item>Szczecin</item>
         <item>Gdynia</item>
         <item>Białystok</item>
         <item>Radom</item>
@@ -38,7 +38,7 @@
         <item>-</item>
         <item>Block of flats</item>
         <item>Apartment building</item>
-        <item>tenement</item>
+        <item>Tenement</item>
     </string-array>
 
     <string-array name="area_options">
@@ -71,8 +71,8 @@
 
     <string-array name="ownership_options">
         <item>-</item>
-        <item>condominium</item>
-        <item>cooperative</item>
+        <item>Condominium</item>
+        <item>Cooperative</item>
     </string-array>
 
     <string-array name="price_options">

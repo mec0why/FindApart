@@ -5,9 +5,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.wsb.findapart.R
+import com.wsb.findapart.data.DropdownMapping.centreDistanceMapping
+import com.wsb.findapart.data.DropdownMapping.cityMapping
+import com.wsb.findapart.data.DropdownMapping.floorMapping
+import com.wsb.findapart.data.DropdownMapping.ownershipMapping
+import com.wsb.findapart.data.DropdownMapping.priceMapping
+import com.wsb.findapart.data.DropdownMapping.roomsMapping
+import com.wsb.findapart.data.DropdownMapping.squareMetersMapping
+import com.wsb.findapart.data.DropdownMapping.typeMapping
 import com.wsb.findapart.databinding.FragmentHomeBinding
 import java.io.IOException
 
@@ -23,23 +31,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         db = importDatabase()
 
-        val cityOptions = resources.getStringArray(R.array.city_options).toList()
-        val typeOptions = resources.getStringArray(R.array.type_options).toList()
-        val areaOptions = resources.getStringArray(R.array.area_options).toList()
-        val roomOptions = resources.getStringArray(R.array.room_options).toList()
-        val floorOptions = resources.getStringArray(R.array.floor_options).toList()
-        val centreOptions = resources.getStringArray(R.array.centre_options).toList()
-        val ownershipOptions = resources.getStringArray(R.array.ownership_options).toList()
-        val priceOptions = resources.getStringArray(R.array.price_options).toList()
+        val dropdownData = mapOf(
+            binding.cityFilter.editText to R.array.city_options,
+            binding.typeFilter.editText to R.array.type_options,
+            binding.areaFilter.editText to R.array.area_options,
+            binding.roomFilter.editText to R.array.room_options,
+            binding.floorFilter.editText to R.array.floor_options,
+            binding.centreFilter.editText to R.array.centre_options,
+            binding.ownershipFilter.editText to R.array.ownership_options,
+            binding.priceFilter.editText to R.array.price_options
+        )
 
-        setUpDropdown(binding.cityFilter.editText, cityOptions)
-        setUpDropdown(binding.typeFilter.editText, typeOptions)
-        setUpDropdown(binding.areaFilter.editText, areaOptions)
-        setUpDropdown(binding.roomFilter.editText, roomOptions)
-        setUpDropdown(binding.floorFilter.editText, floorOptions)
-        setUpDropdown(binding.centreFilter.editText, centreOptions)
-        setUpDropdown(binding.ownershipFilter.editText, ownershipOptions)
-        setUpDropdown(binding.priceFilter.editText, priceOptions)
+        dropdownData.forEach { (view, arrayId) ->
+            setUpDropdown(view, resources.getStringArray(arrayId).toList())
+        }
 
         binding.searchButton.setOnClickListener {
             performSearch()
@@ -55,71 +60,52 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun importDatabase(): SQLiteDatabase {
         val dbFile = requireContext().getDatabasePath("apartments.db")
-
         if (!dbFile.exists()) {
             try {
                 requireContext().assets.open("apartments.sql").use { input ->
                     val sqlScript = input.bufferedReader().use { it.readText() }
-
                     val db = requireContext().openOrCreateDatabase("apartments.db", android.content.Context.MODE_PRIVATE, null)
-                    db.execSQL(sqlScript)
+                    db.beginTransaction()
+                    sqlScript.split(";").filter { it.isNotBlank() }.forEach { statement ->
+                        db.execSQL(statement)
+                    }
+                    db.setTransactionSuccessful()
+                    db.endTransaction()
                     db.close()
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
             }
         }
-
         return SQLiteDatabase.openDatabase(dbFile.path, null, SQLiteDatabase.OPEN_READWRITE)
     }
 
     private fun performSearch() {
-        val city = binding.cityFilter.editText?.text.toString()
-        val type = binding.typeFilter.editText?.text.toString()
-        val area = binding.areaFilter.editText?.text.toString()
-        val room = binding.roomFilter.editText?.text.toString()
-        val floor = binding.floorFilter.editText?.text.toString()
-        val centre = binding.centreFilter.editText?.text.toString()
-        val ownership = binding.ownershipFilter.editText?.text.toString()
-        val price = binding.priceFilter.editText?.text.toString()
+        val filters = listOf(
+            "city" to Pair(binding.cityFilter.editText?.text.toString(), cityMapping),
+            "type" to Pair(binding.typeFilter.editText?.text.toString(), typeMapping),
+            "squareMeters" to Pair(binding.areaFilter.editText?.text.toString(), squareMetersMapping),
+            "rooms" to Pair(binding.roomFilter.editText?.text.toString(), roomsMapping),
+            "floor" to Pair(binding.floorFilter.editText?.text.toString(), floorMapping),
+            "centreDistance" to Pair(binding.centreFilter.editText?.text.toString(), centreDistanceMapping),
+            "ownership" to Pair(binding.ownershipFilter.editText?.text.toString(), ownershipMapping),
+            "price" to Pair(binding.priceFilter.editText?.text.toString(), priceMapping)
+        )
 
-        val query = buildQuery(city, type, area, room, floor, centre, ownership, price)
-
-        val cursor = db.rawQuery(query, null)
-        if (cursor != null && cursor.count > 0) {
-            Toast.makeText(requireContext(), "Found ${cursor.count} results", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
+        val bundle = Bundle().apply {
+            filters.forEach { (key, value) ->
+                putString(key, value.second[value.first] ?: "")
+            }
         }
 
-        cursor.close()
-    }
-
-    private fun buildQuery(
-        city: String, type: String, area: String, room: String, floor: String,
-        centre: String, ownership: String, price: String
-    ): String {
-        val baseQuery = "SELECT * FROM apartments WHERE 1=1"
-        val conditions = mutableListOf<String>()
-
-        if (city.isNotEmpty()) conditions.add("city = '$city'")
-        if (type.isNotEmpty()) conditions.add("type = '$type'")
-        if (area.isNotEmpty()) conditions.add("area = '$area'")
-        if (room.isNotEmpty()) conditions.add("room_count = '$room'")
-        if (floor.isNotEmpty()) conditions.add("floor = '$floor'")
-        if (centre.isNotEmpty()) conditions.add("centre = '$centre'")
-        if (ownership.isNotEmpty()) conditions.add("ownership = '$ownership'")
-        if (price.isNotEmpty()) conditions.add("price <= '$price'")
-
-        return if (conditions.isNotEmpty()) {
-            "$baseQuery AND ${conditions.joinToString(" AND ")}"
-        } else {
-            baseQuery
-        }
+        findNavController().navigate(R.id.action_homeFragment_to_listFragment, bundle)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        if (::db.isInitialized && db.isOpen) {
+            db.close()
+        }
         _binding = null
     }
 }

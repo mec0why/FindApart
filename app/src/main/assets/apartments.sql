@@ -1,4 +1,4 @@
-CREATE TABLE "mytable" (
+CREATE TABLE "apartments" (
   "id" text,
   "city" text,
   "type" text,
@@ -29,7 +29,7 @@ CREATE TABLE "mytable" (
   "price" bigint
 );
 
-INSERT INTO "mytable" ("id","city","type","squareMeters","rooms","floor","floorCount","buildYear","latitude","longitude","centreDistance","poiCount","schoolDistance","clinicDistance","postOfficeDistance","kindergartenDistance","restaurantDistance","collegeDistance","pharmacyDistance","ownership","buildingMaterial","condition","hasParkingSpace","hasBalcony","hasElevator","hasSecurity","hasStorageRoom","price")
+INSERT INTO "apartments" ("id","city","type","squareMeters","rooms","floor","floorCount","buildYear","latitude","longitude","centreDistance","poiCount","schoolDistance","clinicDistance","postOfficeDistance","kindergartenDistance","restaurantDistance","collegeDistance","pharmacyDistance","ownership","buildingMaterial","condition","hasParkingSpace","hasBalcony","hasElevator","hasSecurity","hasStorageRoom","price")
 VALUES
 ('811891f98a870dfd6e414374a0a85560','szczecin','blockOfFlats',47,2,6,12,1981,53.4285438,14.5528116,0.79,67,0.288,0.285,0.268,0.245,0.068,0.593,0.085,'condominium','concreteSlab',NULL,'no','yes','yes','no','yes',449000),
 ('adaf636d0c44d8d9325bce42403eefee','szczecin','apartmentBuilding',88.22,3,1,2,2000,53.4490931,14.5168436,4.09,0,0.509,1.039,0.998,0.676,0.661,1.192,0.668,'condominium','brick','premium','yes','yes','no','no','no',950000),
