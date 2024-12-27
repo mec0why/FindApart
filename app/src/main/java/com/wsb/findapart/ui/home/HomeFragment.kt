@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.wsb.findapart.R
@@ -49,6 +50,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.searchButton.setOnClickListener {
             performSearch()
         }
+
+        binding.clearButton.setOnClickListener {
+            clearFilters()
+        }
     }
 
     private fun setUpDropdown(autoCompleteTextView: View?, options: List<String>) {
@@ -92,13 +97,45 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             "price" to Pair(binding.priceFilter.editText?.text.toString(), priceMapping)
         )
 
-        val bundle = Bundle().apply {
-            filters.forEach { (key, value) ->
-                putString(key, value.second[value.first] ?: "")
-            }
+        val queryConditions = filters.mapNotNull { (key, value) ->
+            val mappedValue = value.second[value.first]
+            if (!mappedValue.isNullOrEmpty()) "$key = '$mappedValue'" else null
+        }.joinToString(" AND ")
+
+        val query = if (queryConditions.isNotEmpty()) {
+            "SELECT COUNT(*) FROM apartments WHERE $queryConditions"
+        } else {
+            "SELECT COUNT(*) FROM apartments"
         }
 
-        findNavController().navigate(R.id.action_homeFragment_to_listFragment, bundle)
+        db.rawQuery(query, null).use { cursor ->
+            if (cursor.moveToFirst()) {
+                val resultCount = cursor.getInt(0)
+                if (resultCount > 0) {
+                    val bundle = Bundle().apply {
+                        filters.forEach { (key, value) ->
+                            putString(key, value.second[value.first] ?: "")
+                        }
+                    }
+                    findNavController().navigate(R.id.action_homeFragment_to_listFragment, bundle)
+                } else {
+                    Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun clearFilters() {
+        binding.cityFilter.editText?.setText("")
+        binding.typeFilter.editText?.setText("")
+        binding.areaFilter.editText?.setText("")
+        binding.roomFilter.editText?.setText("")
+        binding.floorFilter.editText?.setText("")
+        binding.centreFilter.editText?.setText("")
+        binding.ownershipFilter.editText?.setText("")
+        binding.priceFilter.editText?.setText("")
+
+        Toast.makeText(requireContext(), "Filters cleared", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

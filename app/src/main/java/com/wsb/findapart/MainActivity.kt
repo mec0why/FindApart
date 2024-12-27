@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.appbar.AppBarLayout
 import com.wsb.findapart.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +33,18 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             collapsingToolbar.title = destination.label
-            binding.headerImage.visibility = if (destination.id == R.id.navigation_home) View.VISIBLE else View.GONE
+
+            if (destination.id == R.id.navigation_home) {
+                binding.collapsingToolbar.layoutParams = (binding.collapsingToolbar.layoutParams as AppBarLayout.LayoutParams).apply {
+                    scrollFlags = 0
+                }
+                binding.headerImage.visibility = View.VISIBLE
+            } else {
+                binding.collapsingToolbar.layoutParams = (binding.collapsingToolbar.layoutParams as AppBarLayout.LayoutParams).apply {
+                    scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
+                }
+                binding.headerImage.visibility = View.GONE
+            }
         }
 
         toolbar.setOnMenuItemClickListener { menuItem ->

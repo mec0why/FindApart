@@ -14,6 +14,7 @@
     <string name="label_ownership">Ownership</string>
     <string name="label_price">Price</string>
     <string name="label_search">Search</string>
+    <string name="label_clear">Clear</string>
 
     <string-array name="city_options">
         <item>-</item>
