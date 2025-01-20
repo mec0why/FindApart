@@ -109,6 +109,10 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             }
         }
 
+        binding.floatingActionButton.setOnClickListener {
+            binding.recyclerView.smoothScrollToPosition(0)
+        }
+
         adapter = ApartmentAdapter(apartments)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
