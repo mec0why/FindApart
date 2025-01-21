@@ -26,5 +26,6 @@ data class Apartment(
     val hasElevator: String,
     val hasSecurity: String,
     val hasStorageRoom: String,
-    val price: Int
+    val price: Int,
+    var isDetailsVisible: Boolean = false
 )

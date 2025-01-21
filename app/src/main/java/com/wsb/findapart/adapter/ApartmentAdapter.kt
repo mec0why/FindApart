@@ -1,8 +1,10 @@
 package com.wsb.findapart.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.wsb.findapart.data.ListMapping
 import com.wsb.findapart.databinding.ItemApartmentBinding
 import com.wsb.findapart.model.Apartment
 import java.util.Locale
@@ -14,34 +16,46 @@ class ApartmentAdapter(private val apartments: List<Apartment>) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(apartment: Apartment) {
-            binding.tvCity.text = apartment.city
-            binding.tvType.text = apartment.type
+            binding.tvCity.text = "City: ${ListMapping.cityMapping[apartment.city] ?: apartment.city}"
+            binding.tvType.text = "Type: ${ListMapping.typeMapping[apartment.type] ?: apartment.type}"
 
-            binding.tvArea.text = String.format(Locale.getDefault(), "%.2f", apartment.squareMeters)
-            binding.tvRoom.text = String.format(Locale.getDefault(), "%d", apartment.rooms)
-            binding.tvFloor.text = String.format(Locale.getDefault(), "%d", apartment.floor)
-            binding.tvFloorCount.text = String.format(Locale.getDefault(), "%d", apartment.floorCount)
-            binding.tvBuildYear.text = String.format(Locale.getDefault(), "%d", apartment.buildYear)
-            binding.tvCentreDistance.text = String.format(Locale.getDefault(), "%.2f", apartment.centreDistance)
-            binding.tvPoiCount.text = String.format(Locale.getDefault(), "%d", apartment.poiCount)
-            binding.tvSchoolDistance.text = String.format(Locale.getDefault(), "%.2f", apartment.schoolDistance)
-            binding.tvClinicDistance.text = String.format(Locale.getDefault(), "%.2f", apartment.clinicDistance)
-            binding.tvPostOfficeDistance.text = String.format(Locale.getDefault(), "%.2f", apartment.postOfficeDistance)
-            binding.tvKindergartenDistance.text = String.format(Locale.getDefault(), "%.2f", apartment.kindergartenDistance)
-            binding.tvRestaurantDistance.text = String.format(Locale.getDefault(), "%.2f", apartment.restaurantDistance)
-            binding.tvCollegeDistance.text = String.format(Locale.getDefault(), "%.2f", apartment.collegeDistance)
-            binding.tvPharmacyDistance.text = String.format(Locale.getDefault(), "%.2f", apartment.pharmacyDistance)
+            binding.tvArea.text = String.format(Locale.getDefault(), "Square Meters: %.2f m", apartment.squareMeters)
+            binding.tvRoom.text = String.format(Locale.getDefault(), "Rooms: %d", apartment.rooms)
+            binding.tvFloor.text = String.format(Locale.getDefault(), "Floor: %d", apartment.floor)
+            binding.tvFloorCount.text = String.format(Locale.getDefault(), "Floor Count: %d", apartment.floorCount)
+            binding.tvBuildYear.text = String.format(Locale.getDefault(), "Build Year: %s", if (apartment.buildYear == 0) "-" else apartment.buildYear.toString())
+            binding.tvCentreDistance.text = String.format(Locale.getDefault(), "Centre Distance: %.0f m", apartment.centreDistance * 1000)
+            binding.tvPoiCount.text = String.format(Locale.getDefault(), "POI Count: %d", apartment.poiCount)
+            binding.tvSchoolDistance.text = String.format(Locale.getDefault(), "School Distance: %.0f m", apartment.schoolDistance * 1000)
+            binding.tvClinicDistance.text = String.format(Locale.getDefault(), "Clinic Distance: %.0f m", apartment.clinicDistance * 1000)
+            binding.tvPostOfficeDistance.text = String.format(Locale.getDefault(), "Post Office Distance: %.0f m", apartment.postOfficeDistance * 1000)
+            binding.tvKindergartenDistance.text = String.format(Locale.getDefault(), "Kindergarten Distance: %.0f m", apartment.kindergartenDistance * 1000)
+            binding.tvRestaurantDistance.text = String.format(Locale.getDefault(), "Restaurant Distance: %.0f m", apartment.restaurantDistance * 1000)
+            binding.tvCollegeDistance.text = String.format(Locale.getDefault(), "College Distance: %.0f m", apartment.collegeDistance * 1000)
+            binding.tvPharmacyDistance.text = String.format(Locale.getDefault(), "Pharmacy Distance: %.0f m", apartment.pharmacyDistance * 1000)
 
-            binding.tvOwnership.text = apartment.ownership
-            binding.tvBuildingMaterial.text = apartment.buildingMaterial
-            binding.tvCondition.text = apartment.condition
-            binding.tvHasParkingSpace.text = apartment.hasParkingSpace
-            binding.tvHasBalcony.text = apartment.hasBalcony
-            binding.tvHasElevator.text = apartment.hasElevator
-            binding.tvHasSecurity.text = apartment.hasSecurity
-            binding.tvHasStorageRoom.text = apartment.hasStorageRoom
+            binding.tvOwnership.text = "Ownership: ${ListMapping.ownershipMapping[apartment.ownership] ?: apartment.ownership}"
+            binding.tvBuildingMaterial.text = "Building Material: ${ListMapping.buildingMaterialMapping[apartment.buildingMaterial] ?: apartment.buildingMaterial}"
+            binding.tvCondition.text = "Condition: ${ListMapping.conditionMapping[apartment.condition] ?: apartment.condition}"
+            binding.tvHasParkingSpace.text = "Parking Space: ${apartment.hasParkingSpace}"
+            binding.tvHasBalcony.text = "Balcony: ${apartment.hasBalcony}"
+            binding.tvHasElevator.text = "Elevator: ${apartment.hasElevator}"
+            binding.tvHasSecurity.text = "Security: ${apartment.hasSecurity}"
+            binding.tvHasStorageRoom.text = "Storage Room: ${apartment.hasStorageRoom}"
 
-            binding.tvPrice.text = String.format(Locale.getDefault(), "%,d", apartment.price)
+            binding.tvPrice.text = String.format(Locale.getDefault(), "Price: %,d PLN", apartment.price)
+
+            binding.detailsContainer.visibility = if (apartment.isDetailsVisible) View.VISIBLE else View.GONE
+            binding.buttonsContainer.visibility = if (apartment.isDetailsVisible) View.VISIBLE else View.GONE
+
+            binding.root.setOnClickListener {
+                toggleDetailsVisibility(apartment)
+            }
+        }
+
+        private fun toggleDetailsVisibility(apartment: Apartment) {
+            apartment.isDetailsVisible = !apartment.isDetailsVisible
+            notifyItemChanged(adapterPosition)
         }
     }
 
