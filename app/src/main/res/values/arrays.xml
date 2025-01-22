@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="city_options">
+        <item>-</item>
+        <item>Warszawa</item>
+        <item>Kraków</item>
+        <item>Wrocław</item>
+        <item>Gdańsk</item>
+        <item>Poznań</item>
+        <item>Szczecin</item>
+        <item>Gdynia</item>
+        <item>Białystok</item>
+        <item>Radom</item>
+        <item>Rzeszów</item>
+        <item>Łódź</item>
+        <item>Katowice</item>
+        <item>Lublin</item>
+        <item>Częstochowa</item>
+        <item>Bydgoszcz</item>
+    </string-array>
+
+    <string-array name="type_options">
+        <item>-</item>
+        <item>Block of flats</item>
+        <item>Apartment building</item>
+        <item>Tenement</item>
+    </string-array>
+
+    <string-array name="area_options">
+        <item>-</item>
+        <item>below 40 m²</item>
+        <item>40–60 m²</item>
+        <item>60–80 m²</item>
+        <item>above 80 m²</item>
+    </string-array>
+
+    <string-array name="room_options">
+        <item>-</item>
+        <item>1–3 rooms</item>
+        <item>4–6 rooms</item>
+    </string-array>
+
+    <string-array name="floor_options">
+        <item>-</item>
+        <item>1–5 floor</item>
+        <item>6–10 floor</item>
+        <item>above 10th floor</item>
+    </string-array>
+
+    <string-array name="centre_options">
+        <item>-</item>
+        <item>0–5 km</item>
+        <item>5–10 km</item>
+        <item>above 10 km</item>
+    </string-array>
+
+    <string-array name="ownership_options">
+        <item>-</item>
+        <item>Condominium</item>
+        <item>Cooperative</item>
+    </string-array>
+
+    <string-array name="price_options">
+        <item>-</item>
+        <item>below 500k PLN</item>
+        <item>500k-1mln PLN</item>
+        <item>1mln-1,5mln PLN</item>
+        <item>1,5mln-2mln PLN</item>
+        <item>above 2mln PLN</item>
+    </string-array>
+</resources>

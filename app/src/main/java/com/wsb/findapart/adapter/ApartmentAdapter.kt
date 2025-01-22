@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.wsb.findapart.R
 import com.wsb.findapart.data.ListMapping
 import com.wsb.findapart.databinding.ItemApartmentBinding
 import com.wsb.findapart.model.Apartment
@@ -18,6 +19,7 @@ class ApartmentAdapter(private val apartments: List<Apartment>) :
         fun bind(apartment: Apartment) {
             binding.tvCity.text = "City: ${ListMapping.cityMapping[apartment.city] ?: apartment.city}"
             binding.tvType.text = "Type: ${ListMapping.typeMapping[apartment.type] ?: apartment.type}"
+            binding.ivTypeIcon.setImageResource(getTypeIcon(apartment.type))
 
             binding.tvArea.text = String.format(Locale.getDefault(), "Square Meters: %.2f m", apartment.squareMeters)
             binding.tvRoom.text = String.format(Locale.getDefault(), "Rooms: %d", apartment.rooms)
@@ -56,6 +58,15 @@ class ApartmentAdapter(private val apartments: List<Apartment>) :
         private fun toggleDetailsVisibility(apartment: Apartment) {
             apartment.isDetailsVisible = !apartment.isDetailsVisible
             notifyItemChanged(adapterPosition)
+        }
+
+        private fun getTypeIcon(type: String): Int {
+            return when (type) {
+                "apartmentBuilding" -> R.drawable.apartment_48px
+                "blockOfFlats" -> R.drawable.domain_48px
+                "tenement" -> R.drawable.location_city_48px
+                else -> 0
+            }
         }
     }
 

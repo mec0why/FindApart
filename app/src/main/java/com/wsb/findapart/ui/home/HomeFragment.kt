@@ -97,31 +97,48 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             "price" to Pair(binding.priceFilter.editText?.text.toString(), priceMapping)
         )
 
-        val queryConditions = filters.mapNotNull { (key, value) ->
-            val mappedValue = value.second[value.first]
-            if (!mappedValue.isNullOrEmpty()) "$key = '$mappedValue'" else null
-        }.joinToString(" AND ")
+        val conditions = mutableListOf<String>()
 
-        val query = if (queryConditions.isNotEmpty()) {
-            "SELECT COUNT(*) FROM apartments WHERE $queryConditions"
+        filters.forEach { (key, value) ->
+            val filterValue = value.first
+            val mapping = value.second
+
+            if (filterValue.isNotEmpty()) {
+                when (key) {
+                    "squareMeters", "rooms", "floor", "centreDistance", "price" -> {
+                        mapping[filterValue]?.let { condition ->
+                            conditions.add(condition)
+                        }
+                    }
+                    else -> {
+                        mapping[filterValue]?.let { mappedValue ->
+                            conditions.add("$key = '$mappedValue'")
+                        }
+                    }
+                }
+            }
+        }
+
+        val query = if (conditions.isNotEmpty()) {
+            "SELECT COUNT(*) FROM apartments WHERE ${conditions.joinToString(" AND ")}"
         } else {
             "SELECT COUNT(*) FROM apartments"
         }
 
-        db.rawQuery(query, null).use { cursor ->
-            if (cursor.moveToFirst()) {
-                val resultCount = cursor.getInt(0)
-                if (resultCount > 0) {
-                    val bundle = Bundle().apply {
-                        filters.forEach { (key, value) ->
-                            putString(key, value.second[value.first] ?: "")
-                        }
-                    }
-                    findNavController().navigate(R.id.action_homeFragment_to_listFragment, bundle)
-                } else {
-                    Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
+        val count = db.rawQuery(query, null).use { cursor ->
+            if (cursor.moveToFirst()) cursor.getInt(0) else 0
+        }
+
+        if (count > 0) {
+            val bundle = Bundle().apply {
+                filters.forEach { (key, value) ->
+                    putString(key, value.second[value.first] ?: "")
                 }
             }
+            Toast.makeText(requireContext(), "Found $count results", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeFragment_to_listFragment, bundle)
+        } else {
+            Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
         }
     }
 

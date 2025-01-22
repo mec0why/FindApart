@@ -3,7 +3,6 @@ package com.wsb.findapart.ui.list
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wsb.findapart.R
@@ -44,7 +43,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
         db.rawQuery(query, null).use { cursor ->
             if (cursor.count > 0 && cursor.moveToFirst()) {
-                Toast.makeText(requireContext(), "Found ${cursor.count} results", Toast.LENGTH_SHORT).show()
                 do {
                     val idIndex = cursor.getColumnIndex("id")
                     val cityIndex = cursor.getColumnIndex("city")
@@ -104,8 +102,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
                     apartments.add(apartment)
                 } while (cursor.moveToNext())
-            } else {
-                Toast.makeText(requireContext(), "No results found", Toast.LENGTH_SHORT).show()
             }
         }
 
