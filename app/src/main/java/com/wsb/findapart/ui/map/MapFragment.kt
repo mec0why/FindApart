@@ -3,31 +3,35 @@ package com.wsb.findapart.ui.map
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
 import com.wsb.findapart.R
-import com.wsb.findapart.databinding.FragmentMapBinding
 
-class MapFragment : Fragment(R.layout.fragment_map) {
-    private lateinit var viewModel: MapViewModel
-    private var _binding: FragmentMapBinding? = null
-    private val binding get() = _binding!!
+class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback {
+
+    private lateinit var googleMap: GoogleMap
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentMapBinding.bind(view)
-
-        val textView = binding.textMap
-
-        viewModel = ViewModelProvider(this).get<MapViewModel>()
-        viewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onMapReady(map: GoogleMap) {
+        googleMap = map
+
+        val initialLocation = LatLng(51.9189, 19.1344)
+        googleMap.addMarker(MarkerOptions().position(initialLocation).title("Poland"))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, 6f))
+        googleMap.setMapStyle(context?.let { MapStyleOptions.loadRawResourceStyle(it, R.raw.map_style) })
+        googleMap.uiSettings.isZoomControlsEnabled = true
+        googleMap.uiSettings.isCompassEnabled = true
+        googleMap.setPadding(0, 0, 0, 232)
     }
 }
