@@ -34,17 +34,21 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             collapsingToolbar.title = destination.label
 
-            if (destination.id == R.id.navigation_home) {
-                binding.collapsingToolbar.layoutParams = (binding.collapsingToolbar.layoutParams as AppBarLayout.LayoutParams).apply {
-                    scrollFlags = 0
+            binding.collapsingToolbar.layoutParams = (binding.collapsingToolbar.layoutParams as AppBarLayout.LayoutParams).apply {
+                scrollFlags = if (destination.id == R.id.navigation_home) {
+                    0
+                } else {
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
                 }
-                binding.headerImage.visibility = View.VISIBLE
-            } else {
-                binding.collapsingToolbar.layoutParams = (binding.collapsingToolbar.layoutParams as AppBarLayout.LayoutParams).apply {
-                    scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
-                }
-                binding.headerImage.visibility = View.GONE
             }
+
+            binding.headerImage.visibility = if (destination.id == R.id.navigation_home) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+
+            binding.appBarLayout.setExpanded(destination.id != R.id.navigation_map, true)
         }
 
         toolbar.setOnMenuItemClickListener { menuItem ->

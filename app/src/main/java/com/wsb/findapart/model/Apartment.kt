@@ -27,5 +27,6 @@ data class Apartment(
     val hasSecurity: String,
     val hasStorageRoom: String,
     val price: Int,
-    var isDetailsVisible: Boolean = false
+    var isDetailsVisible: Boolean = false,
+    var isSaved: Boolean = false
 )

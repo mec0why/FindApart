@@ -32,6 +32,5 @@ class MapFragment : Fragment(R.layout.fragment_map), OnMapReadyCallback {
         googleMap.setMapStyle(context?.let { MapStyleOptions.loadRawResourceStyle(it, R.raw.map_style) })
         googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.uiSettings.isCompassEnabled = true
-        googleMap.setPadding(0, 0, 0, 232)
     }
 }

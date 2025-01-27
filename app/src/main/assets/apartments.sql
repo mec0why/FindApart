@@ -29,6 +29,37 @@ CREATE TABLE "apartments" (
   "price" bigint
 );
 
+CREATE TABLE "saved_apartments" (
+  "id" text,
+  "city" text,
+  "type" text,
+  "squareMeters" double precision,
+  "rooms" bigint,
+  "floor" bigint,
+  "floorCount" bigint,
+  "buildYear" bigint NULL,
+  "latitude" double precision,
+  "longitude" double precision,
+  "centreDistance" double precision,
+  "poiCount" bigint,
+  "schoolDistance" double precision NULL,
+  "clinicDistance" double precision NULL,
+  "postOfficeDistance" double precision NULL,
+  "kindergartenDistance" double precision NULL,
+  "restaurantDistance" double precision NULL,
+  "collegeDistance" double precision NULL,
+  "pharmacyDistance" double precision NULL,
+  "ownership" text,
+  "buildingMaterial" text NULL,
+  "condition" text NULL,
+  "hasParkingSpace" text,
+  "hasBalcony" text,
+  "hasElevator" text NULL,
+  "hasSecurity" text,
+  "hasStorageRoom" text,
+  "price" bigint
+);
+
 INSERT INTO "apartments" ("id","city","type","squareMeters","rooms","floor","floorCount","buildYear","latitude","longitude","centreDistance","poiCount","schoolDistance","clinicDistance","postOfficeDistance","kindergartenDistance","restaurantDistance","collegeDistance","pharmacyDistance","ownership","buildingMaterial","condition","hasParkingSpace","hasBalcony","hasElevator","hasSecurity","hasStorageRoom","price")
 VALUES
 ('811891f98a870dfd6e414374a0a85560','szczecin','blockOfFlats',47,2,6,12,1981,53.4285438,14.5528116,0.79,67,0.288,0.285,0.268,0.245,0.068,0.593,0.085,'condominium','concreteSlab',NULL,'no','yes','yes','no','yes',449000),

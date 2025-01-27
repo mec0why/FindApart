@@ -105,6 +105,12 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             }
         }
 
+        if (apartments.size < 5) {
+            binding.floatingActionButton.visibility = View.GONE
+        } else {
+            binding.floatingActionButton.visibility = View.VISIBLE
+        }
+
         binding.floatingActionButton.setOnClickListener {
             binding.recyclerView.smoothScrollToPosition(0)
         }

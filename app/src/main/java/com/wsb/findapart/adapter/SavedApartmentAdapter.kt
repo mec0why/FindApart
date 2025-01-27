@@ -12,8 +12,8 @@ import com.wsb.findapart.databinding.ItemApartmentBinding
 import com.wsb.findapart.model.Apartment
 import java.util.Locale
 
-class ApartmentAdapter(private val apartments: MutableList<Apartment>) :
-    RecyclerView.Adapter<ApartmentAdapter.ApartmentViewHolder>() {
+class SavedApartmentAdapter(private val apartments: MutableList<Apartment>, private val recyclerView: RecyclerView, private val textSaved: View, private val floatingActionButton: View) :
+    RecyclerView.Adapter<SavedApartmentAdapter.ApartmentViewHolder>() {
 
     inner class ApartmentViewHolder(private val binding: ItemApartmentBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -61,11 +61,17 @@ class ApartmentAdapter(private val apartments: MutableList<Apartment>) :
 
             binding.btnSave.setOnCheckedChangeListener { _, isChecked ->
                 apartment.isSaved = isChecked
-                if (isChecked) {
-                    saveApartment(apartment)
-                } else {
+                if (!isChecked) {
                     removeApartment(apartment)
                 }
+            }
+
+            if (apartments.isEmpty()) {
+                recyclerView.visibility = View.GONE
+                textSaved.visibility = View.VISIBLE
+            } else {
+                recyclerView.visibility = View.VISIBLE
+                textSaved.visibility = View.GONE
             }
 
             checkIfApartmentSaved(apartment)
@@ -105,65 +111,6 @@ class ApartmentAdapter(private val apartments: MutableList<Apartment>) :
             }
         }
 
-        private fun saveApartment(apartment: Apartment) {
-            val db = SQLiteDatabase.openDatabase(
-                itemView.context.getDatabasePath("apartments.db").path,
-                null,
-                SQLiteDatabase.OPEN_READWRITE
-            )
-
-            val query = """
-                INSERT OR REPLACE INTO saved_apartments (
-                    id, city, type, squareMeters, rooms, floor, floorCount, buildYear,
-                    centreDistance, poiCount, schoolDistance, clinicDistance, postOfficeDistance,
-                    kindergartenDistance, restaurantDistance, collegeDistance, pharmacyDistance,
-                    ownership, buildingMaterial, condition, hasParkingSpace, hasBalcony,
-                    hasElevator, hasSecurity, hasStorageRoom, price
-                ) VALUES (
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-                );
-            """.trimIndent()
-
-            db.execSQL(
-                query, arrayOf(
-                    apartment.id,
-                    apartment.city,
-                    apartment.type,
-                    apartment.squareMeters,
-                    apartment.rooms,
-                    apartment.floor,
-                    apartment.floorCount,
-                    apartment.buildYear,
-                    apartment.centreDistance,
-                    apartment.poiCount,
-                    apartment.schoolDistance,
-                    apartment.clinicDistance,
-                    apartment.postOfficeDistance,
-                    apartment.kindergartenDistance,
-                    apartment.restaurantDistance,
-                    apartment.collegeDistance,
-                    apartment.pharmacyDistance,
-                    apartment.ownership,
-                    apartment.buildingMaterial,
-                    apartment.condition,
-                    apartment.hasParkingSpace,
-                    apartment.hasBalcony,
-                    apartment.hasElevator,
-                    apartment.hasSecurity,
-                    apartment.hasStorageRoom,
-                    apartment.price
-                )
-            )
-
-            Toast.makeText(
-                itemView.context,
-                "Apartment added to saved list",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            db.close()
-        }
-
         private fun removeApartment(apartment: Apartment) {
             val db = SQLiteDatabase.openDatabase(
                 itemView.context.getDatabasePath("apartments.db").path,
@@ -175,11 +122,31 @@ class ApartmentAdapter(private val apartments: MutableList<Apartment>) :
             db.execSQL(query, arrayOf(apartment.id))
             db.close()
 
-            Toast.makeText(
-                itemView.context,
-                "Apartment removed from saved list",
-                Toast.LENGTH_SHORT
-            ).show()
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                apartments.removeAt(position)
+                notifyItemRemoved(position)
+
+                Toast.makeText(
+                    itemView.context,
+                    "Apartment removed from saved list",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                if (apartments.isEmpty()) {
+                    recyclerView.visibility = View.GONE
+                    textSaved.visibility = View.VISIBLE
+                } else {
+                    recyclerView.visibility = View.VISIBLE
+                    textSaved.visibility = View.GONE
+                }
+
+                if (apartments.size < 5) {
+                    floatingActionButton.visibility = View.GONE
+                } else {
+                    floatingActionButton.visibility = View.VISIBLE
+                }
+            }
         }
     }
 
