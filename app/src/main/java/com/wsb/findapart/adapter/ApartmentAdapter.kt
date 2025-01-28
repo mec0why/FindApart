@@ -1,10 +1,12 @@
 package com.wsb.findapart.adapter
 
 import android.database.sqlite.SQLiteDatabase
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.wsb.findapart.R
 import com.wsb.findapart.data.ListMapping
@@ -68,6 +70,20 @@ class ApartmentAdapter(private val apartments: MutableList<Apartment>) :
                 }
             }
 
+            binding.btnMap.setOnClickListener {
+                val latitude = apartment.latitude
+                val longitude = apartment.longitude
+                val price = apartment.price
+
+                val bundle = Bundle().apply {
+                    putDouble("latitude", latitude)
+                    putDouble("longitude", longitude)
+                    putInt("price", price)
+                }
+
+                Navigation.findNavController(binding.root).navigate(R.id.action_listFragment_to_mapFragment, bundle)
+            }
+
             checkIfApartmentSaved(apartment)
         }
 
@@ -118,9 +134,9 @@ class ApartmentAdapter(private val apartments: MutableList<Apartment>) :
                     centreDistance, poiCount, schoolDistance, clinicDistance, postOfficeDistance,
                     kindergartenDistance, restaurantDistance, collegeDistance, pharmacyDistance,
                     ownership, buildingMaterial, condition, hasParkingSpace, hasBalcony,
-                    hasElevator, hasSecurity, hasStorageRoom, price
+                    hasElevator, hasSecurity, hasStorageRoom, price, latitude, longitude
                 ) VALUES (
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                 );
             """.trimIndent()
 
@@ -151,7 +167,9 @@ class ApartmentAdapter(private val apartments: MutableList<Apartment>) :
                     apartment.hasElevator,
                     apartment.hasSecurity,
                     apartment.hasStorageRoom,
-                    apartment.price
+                    apartment.price,
+                    apartment.latitude,
+                    apartment.longitude
                 )
             )
 

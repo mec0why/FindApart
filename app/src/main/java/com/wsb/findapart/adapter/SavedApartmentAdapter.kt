@@ -1,10 +1,12 @@
 package com.wsb.findapart.adapter
 
 import android.database.sqlite.SQLiteDatabase
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.wsb.findapart.R
 import com.wsb.findapart.data.ListMapping
@@ -72,6 +74,20 @@ class SavedApartmentAdapter(private val apartments: MutableList<Apartment>, priv
             } else {
                 recyclerView.visibility = View.VISIBLE
                 textSaved.visibility = View.GONE
+            }
+
+            binding.btnMap.setOnClickListener {
+                val latitude = apartment.latitude
+                val longitude = apartment.longitude
+                val price = apartment.price
+
+                val bundle = Bundle().apply {
+                    putDouble("latitude", latitude)
+                    putDouble("longitude", longitude)
+                    putInt("price", price)
+                }
+
+                Navigation.findNavController(binding.root).navigate(R.id.action_savedFragment_to_mapFragment, bundle)
             }
 
             checkIfApartmentSaved(apartment)

@@ -70,6 +70,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                     val hasSecurityIndex = cursor.getColumnIndex("hasSecurity")
                     val hasStorageRoomIndex = cursor.getColumnIndex("hasStorageRoom")
                     val priceIndex = cursor.getColumnIndex("price")
+                    val latitudeIndex = cursor.getColumnIndex("latitude")
+                    val longitudeIndex = cursor.getColumnIndex("longitude")
 
                     val apartment = Apartment(
                         id = if (idIndex != -1) cursor.getString(idIndex) else "",
@@ -97,7 +99,9 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                         hasElevator = if (hasElevatorIndex != -1) cursor.getString(hasElevatorIndex) ?: "" else "",
                         hasSecurity = if (hasSecurityIndex != -1) cursor.getString(hasSecurityIndex) else "",
                         hasStorageRoom = if (hasStorageRoomIndex != -1) cursor.getString(hasStorageRoomIndex) else "",
-                        price = if (priceIndex != -1) cursor.getInt(priceIndex) else 0
+                        price = if (priceIndex != -1) cursor.getInt(priceIndex) else 0,
+                        latitude = if (latitudeIndex != -1) cursor.getDouble(latitudeIndex) else 0.0,
+                        longitude = if (longitudeIndex != -1) cursor.getDouble(longitudeIndex) else 0.0
                     )
 
                     apartments.add(apartment)

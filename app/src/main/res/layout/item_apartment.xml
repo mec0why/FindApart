@@ -187,7 +187,7 @@
                     style="?attr/materialIconButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:icon="@drawable/map_fill_24px"
+                    app:icon="@drawable/pin_drop_24px"
                     app:iconTint="?attr/colorControlNormal" />
 
                 <CheckBox

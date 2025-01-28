@@ -27,6 +27,8 @@ data class Apartment(
     val hasSecurity: String,
     val hasStorageRoom: String,
     val price: Int,
+    val latitude: Double,
+    val longitude: Double,
     var isDetailsVisible: Boolean = false,
     var isSaved: Boolean = false
 )
