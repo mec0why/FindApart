@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sort_by_price_asc"
+        android:title="@string/label_sort_price_asc" />
+    <item
+        android:id="@+id/sort_by_price_desc"
+        android:title="@string/label_sort_price_desc" />
+    <item
+        android:id="@+id/sort_by_area_asc"
+        android:title="@string/label_sort_area_asc" />
+    <item
+        android:id="@+id/sort_by_area_desc"
+        android:title="@string/label_sort_area_desc" />
+    <item
+        android:id="@+id/sort_by_rooms_asc"
+        android:title="@string/label_sort_rooms_asc" />
+    <item
+        android:id="@+id/sort_by_rooms_desc"
+        android:title="@string/label_sort_rooms_desc" />
+    <item
+        android:id="@+id/sort_by_floor_asc"
+        android:title="@string/label_sort_floor_asc" />
+    <item
+        android:id="@+id/sort_by_floor_desc"
+        android:title="@string/label_sort_floor_desc" />
+    <item
+        android:id="@+id/sort_by_centre_distance_asc"
+        android:title="@string/label_sort_centre_asc" />
+    <item
+        android:id="@+id/sort_by_centre_distance_desc"
+        android:title="@string/label_sort_centre_desc" />
+    <item
+        android:id="@+id/sort_by_random"
+        android:title="@string/label_sort_random" />
+</menu>

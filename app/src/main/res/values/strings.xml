@@ -15,4 +15,16 @@
     <string name="label_price">Price</string>
     <string name="label_search">Search</string>
     <string name="label_clear">Clear</string>
+    <string name="label_sort">Sort By</string>
+    <string name="label_sort_price_asc">Price Ascending</string>
+    <string name="label_sort_price_desc">Price Descending</string>
+    <string name="label_sort_area_asc">Square Meters Ascending</string>
+    <string name="label_sort_area_desc">Square Meters Descending</string>
+    <string name="label_sort_rooms_asc">Rooms Ascending</string>
+    <string name="label_sort_rooms_desc">Rooms Descending</string>
+    <string name="label_sort_floor_asc">Floor Ascending</string>
+    <string name="label_sort_floor_desc">Floor Descending</string>
+    <string name="label_sort_centre_asc">Centre Distance Ascending</string>
+    <string name="label_sort_centre_desc">Centre Distance Descending</string>
+    <string name="label_sort_random">Random</string>
 </resources>

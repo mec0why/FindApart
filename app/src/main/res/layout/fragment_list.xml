@@ -12,14 +12,26 @@
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="104dp" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extended_fab"
+        style="?attr/extendedFloatingActionButtonSecondaryStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="120dp"
+        app:icon="@drawable/sort_24px"
+        android:text="@string/label_sort" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_action_button"
-        style="?attr/floatingActionButtonSmallStyle"
+        style="?attr/floatingActionButtonSmallSurfaceStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="120dp"
-        app:srcCompat="@drawable/arrow_upward_24px" />
+        app:srcCompat="@drawable/arrow_upward_24px"
+        app:tint="?attr/colorOnPrimaryContainer" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

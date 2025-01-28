@@ -3,6 +3,7 @@ package com.wsb.findapart.ui.list
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.View
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wsb.findapart.R
@@ -109,6 +110,10 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             }
         }
 
+        binding.extendedFab.setOnClickListener {
+            showSortMenu(it)
+        }
+
         if (apartments.size < 5) {
             binding.floatingActionButton.visibility = View.GONE
         } else {
@@ -124,11 +129,79 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         binding.recyclerView.adapter = adapter
     }
 
+    private fun showSortMenu(view: View) {
+        val popup = PopupMenu(requireContext(), view)
+        popup.menuInflater.inflate(R.menu.sort_menu, popup.menu)
+
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.sort_by_price_asc -> {
+                    apartments.sortBy { it.price }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_price_desc -> {
+                    apartments.sortByDescending { it.price }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_area_asc -> {
+                    apartments.sortBy { it.squareMeters }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_area_desc -> {
+                    apartments.sortByDescending { it.squareMeters }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_rooms_asc -> {
+                    apartments.sortBy { it.rooms }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_rooms_desc -> {
+                    apartments.sortByDescending { it.rooms }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_floor_asc -> {
+                    apartments.sortBy { it.floor }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_floor_desc -> {
+                    apartments.sortByDescending { it.floor }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_centre_distance_asc -> {
+                    apartments.sortBy { it.centreDistance }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_centre_distance_desc -> {
+                    apartments.sortByDescending { it.centreDistance }
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                R.id.sort_by_random -> {
+                    apartments.shuffle()
+                    adapter.notifyItemRangeChanged(0, apartments.size)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popup.show()
+    }
+
     private fun buildQuery(
         city: String, type: String, squareMeters: String, rooms: String, floor: String,
         centreDistance: String, ownership: String, price: String
     ): String {
-        val baseQuery = "SELECT * FROM apartments WHERE 1=1"
+        val baseQuery = "SELECT * FROM apartments WHERE 1=1 ORDER BY price ASC"
         val conditions = mutableListOf<String>()
 
         if (city.isNotEmpty()) conditions.add("city = '$city'")

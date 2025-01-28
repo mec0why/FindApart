@@ -138,7 +138,7 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
         city: String, type: String, squareMeters: String, rooms: String, floor: String,
         centreDistance: String, ownership: String, price: String
     ): String {
-        val baseQuery = "SELECT * FROM saved_apartments WHERE 1=1"
+        val baseQuery = "SELECT * FROM saved_apartments WHERE 1=1 ORDER BY price ASC"
         val conditions = mutableListOf<String>()
 
         if (city.isNotEmpty()) conditions.add("city = '$city'")
