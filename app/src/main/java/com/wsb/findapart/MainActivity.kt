@@ -2,6 +2,7 @@ package com.wsb.findapart
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -39,6 +40,12 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
                 }
+            }
+
+            if (destination.id == R.id.navigation_home) {
+                collapsingToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.blue_light))
+            } else {
+                collapsingToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
             }
 
             binding.appBarLayout.setExpanded(destination.id != R.id.navigation_map, true)

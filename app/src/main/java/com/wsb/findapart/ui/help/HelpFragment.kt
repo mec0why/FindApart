@@ -1,6 +1,7 @@
 package com.wsb.findapart.ui.help
 
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,8 +22,8 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
         val textView = binding.textHelp
 
         viewModel = ViewModelProvider(this).get<HelpViewModel>()
-        viewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        viewModel.text.observe(viewLifecycleOwner) { text ->
+            textView.text = Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
         }
     }
 

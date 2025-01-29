@@ -14,6 +14,7 @@
     <!-- Background & Surface -->
     <color name="blue_light">#E3F7FB</color>
     <color name="blue_surface_variant">#B8E2F0</color>
+    <color name="blue_transparent">#110477BF</color>
 
     <!-- Standard Colors -->
     <color name="white">#FFFFFF</color>

@@ -28,7 +28,7 @@ class ApartmentAdapter(private val apartments: MutableList<Apartment>) :
             binding.tvArea.text = String.format(Locale.getDefault(), "Square Meters: %.2f m", apartment.squareMeters)
             binding.tvRoom.text = String.format(Locale.getDefault(), "Rooms: %d", apartment.rooms)
             binding.tvFloor.text = String.format(Locale.getDefault(), "Floor: %d", apartment.floor)
-            binding.tvFloorCount.text = String.format(Locale.getDefault(), "Floor Count: %d", apartment.floorCount)
+            binding.tvFloorCount.text = String.format(Locale.getDefault(), "\nFloor Count: %d", apartment.floorCount)
             binding.tvBuildYear.text = String.format(Locale.getDefault(), "Build Year: %s", if (apartment.buildYear == 0) "-" else apartment.buildYear.toString())
             binding.tvCentreDistance.text = String.format(Locale.getDefault(), "Centre Distance: %.0f m", apartment.centreDistance * 1000)
             binding.tvPoiCount.text = String.format(Locale.getDefault(), "POI Count: %d", apartment.poiCount)

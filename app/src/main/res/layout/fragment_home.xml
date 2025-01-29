@@ -130,10 +130,11 @@
 
             <Button
                 style="@style/Widget.Material3.Button.TonalButton"
+                android:backgroundTint="@color/white"
                 android:id="@+id/clear_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:text="@string/label_clear"
                 android:layout_marginEnd="8dp" />
 
