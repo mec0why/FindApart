@@ -21,16 +21,7 @@
             app:collapsedTitleGravity="center"
             app:titleCollapseMode="scale"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="?colorPrimaryContainer">
-
-            <ImageView
-                android:id="@+id/header_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_foreground"
-                android:scaleType="fitEnd"
-                android:alpha="0.1"
-                android:visibility="visible" />
+            app:contentScrim="@color/blue_secondary">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
@@ -59,7 +50,6 @@
         android:layout_gravity="bottom">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            style="@style/Widget.Material3.BottomNavigationView"
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

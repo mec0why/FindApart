@@ -9,8 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.wsb.findapart"
-        minSdk = 24
-        //noinspection EditedTargetSdkVersion
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"

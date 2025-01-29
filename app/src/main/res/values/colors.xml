@@ -1,10 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary Blue Shades -->
+    <color name="blue_primary">#0477BF</color>
+    <color name="blue_primary_container">#3B8EC3</color>
+
+    <!-- Secondary Blue Shades -->
+    <color name="blue_secondary">#B8F2F4</color>
+    <color name="blue_secondary_container">#A0E0E2</color>
+
+    <!-- Accent Orange -->
+    <color name="orange_accent">#F58505</color>
+    <color name="orange_accent_container">#FFD89E</color>
+
+    <!-- Background & Surface -->
+    <color name="blue_light">#E3F7FB</color>
+    <color name="blue_surface_variant">#B8E2F0</color>
+
+    <!-- Standard Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="error_red">#D32F2F</color>
 </resources>

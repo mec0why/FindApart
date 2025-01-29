@@ -1,7 +1,6 @@
 package com.wsb.findapart
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -40,12 +39,6 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
                 }
-            }
-
-            binding.headerImage.visibility = if (destination.id == R.id.navigation_home) {
-                View.VISIBLE
-            } else {
-                View.GONE
             }
 
             binding.appBarLayout.setExpanded(destination.id != R.id.navigation_map, true)

@@ -2,7 +2,8 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_home">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +14,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/city_filter"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_city"
@@ -28,7 +28,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/type_filter"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_type"
@@ -43,7 +42,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/area_filter"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_area"
@@ -58,7 +56,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/room_filter"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_room"
@@ -73,7 +70,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/floor_filter"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_floor"
@@ -88,7 +84,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/centre_filter"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_centre"
@@ -103,7 +98,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ownership_filter"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_ownership"
@@ -118,7 +112,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/price_filter"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_price"
@@ -145,7 +138,7 @@
                 android:layout_marginEnd="8dp" />
 
             <Button
-                style="@style/Widget.Material3.Button.TonalButton"
+                style="@style/Widget.Material3.Button"
                 android:id="@+id/search_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
