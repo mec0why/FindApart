@@ -201,7 +201,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         city: String, type: String, squareMeters: String, rooms: String, floor: String,
         centreDistance: String, ownership: String, price: String
     ): String {
-        val baseQuery = "SELECT * FROM apartments WHERE 1=1 ORDER BY price ASC"
+        val baseQuery = "SELECT * FROM apartments WHERE 1=1"
         val conditions = mutableListOf<String>()
 
         if (city.isNotEmpty()) conditions.add("city = '$city'")
@@ -214,9 +214,9 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         if (price.isNotEmpty()) conditions.add(price)
 
         return if (conditions.isNotEmpty()) {
-            "$baseQuery AND ${conditions.joinToString(" AND ")}"
+            "$baseQuery AND ${conditions.joinToString(" AND ")} ORDER BY price ASC"
         } else {
-            baseQuery
+            "$baseQuery ORDER BY price ASC"
         }
     }
 
